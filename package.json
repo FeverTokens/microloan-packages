@@ -1,0 +1,70 @@
+{
+  "name": "micro-loan",
+  "version": "0.1.0",
+  "description": "Microloan protocol built with the FeverTokens Package-Oriented Framework",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "fevertokens",
+    "diamond",
+    "eip-2535",
+    "microloan",
+    "solidity",
+    "hardhat"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "deploy:stablecoin": "hardhat run scripts/deploy-stablecoin.ts",
+    "run:handlers": "hardhat run scripts/run-handlers.ts",
+    "compile": "TYPECHAIN_DONT_OVERRIDE_COMPILE=true hardhat compile && ts-node scripts/generate-metadata.ts",
+    "compile:microlaon": "hardhat compile",
+    "clean": "npx hardhat clean",
+    "test": "npx hardhat test",
+    "test:microlaon": "hardhat test test/microloan-lifecycle.test.ts",
+    "test:basic": "npx hardhat test --grep 'Basic Token Functionality'",
+    "test:integration": "npx hardhat test --grep 'Full System Integration'",
+    "test:gas": "npx hardhat test --grep 'Gas'",
+    "metadata": "ts-node scripts/generate-metadata.ts",
+    "lint": "prettier --log-level warn --ignore-path .gitignore contracts/**/*.sol --check",
+    "lint:fix": "prettier --log-level warn --ignore-path .gitignore contracts/**/*.sol --write"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-chai-matchers": "^2.1.0",
+    "@nomicfoundation/hardhat-ethers": "^3.1.0",
+    "@nomicfoundation/hardhat-ignition-ethers": "^0.15.14",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.10",
+    "@nomicfoundation/hardhat-toolbox": "^6.1.0",
+    "@nomicfoundation/hardhat-verify": "^2.0.5",
+    "@typechain/ethers-v6": "^0.5.1",
+    "@typechain/hardhat": "^9.1.0",
+    "@types/chai": "^4.3.14",
+    "@types/chai-as-promised": "^7.1.8",
+    "@types/jest": "^29.5.12",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.12.7",
+    "chai": "^4.4.1",
+    "expect": "^29.7.0",
+    "hardhat": "^2.22.2",
+    "hardhat-gas-reporter": "^2.3.0",
+    "prettier": "^3.5.3",
+    "prettier-plugin-solidity": "^1.4.2",
+    "solc": "0.8.0",
+    "solidity-coverage": "^0.8.12",
+    "ts-node": "^10.9.2",
+    "typechain": "^8.3.2",
+    "typescript": "~5.0.4"
+  },
+  "dependencies": {
+    "@ethersproject/abi": "^5.7.0",
+    "@ethersproject/bytes": "^5.7.0",
+    "@openzeppelin/contracts": "^5.0.2",
+    "@types/dotenv": "^8.2.0",
+    "@walletconnect/ethereum-provider": "^2.12.2",
+    "dotenv": "^16.4.5",
+    "ethereum-utils": "^1.0.0",
+    "ethers": "^6.11.1"
+  }
+}

@@ -1,0 +1,21 @@
+apiVersion: beta/v1
+kind: Deployment
+
+metadata:
+  name: loan-registry-deployment
+  version: 1.0.0
+  description: "LoanRegistry package deployment for MicroLoan"
+
+spec:
+  package:
+    name: LoanRegistry
+
+  deployer:
+    wallet:
+      type: "privateKey" # Options: privateKey, mnemonic, keystore
+      value: "${PRIVATE_KEY}" # Environment variable reference
+
+  network:
+    chainId: "${CHAIN_ID}"
+    rpcUrl: "${RPC_URL}"
+

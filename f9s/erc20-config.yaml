@@ -1,0 +1,24 @@
+apiVersion: beta/v1
+kind: Diamond
+
+metadata:
+  name: stablecoin-contract
+  version: 1.0.0
+
+spec:
+  deployer:
+    wallet:
+      type: privateKey
+      value: "${DEPLOYER_PRIVATE_KEY}"
+
+  diamond:
+    name: StableCoin
+    constructorArguments:
+      - "MockUSDC" # PackageController
+      - "mUSDC" # PackageViewer
+      - 6 # Decimals
+      - "${ADMIN_ADDRESS}" # Admin/Owner address
+
+  network:
+    chainId: "${CHAIN_ID}"
+    rpcUrl: "${RPC_URL}"

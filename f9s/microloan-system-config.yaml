@@ -1,0 +1,47 @@
+apiVersion: beta/v1
+kind: Diamond
+
+metadata:
+  name: microloan-diamond
+  version: 1.0.0
+
+spec:
+  deployer:
+    wallet:
+      type: privateKey
+      value: "${DEPLOYER_PRIVATE_KEY}"
+
+  diamond:
+    name: MicroLoanDiamond
+    constructorArguments:
+      - "${PACKAGE_CONTROLLER_ADDRESS}" # PackageController
+      - "${PACKAGE_VIEWER_ADDRESS}" # PackageViewer
+      - "${ADMIN_ADDRESS}" # Admin/Owner address
+
+  packages:
+    - name: LoanRegistry
+      functions:
+        - "0xc19fa698" # createLoan((uint8,uint16,bool,bool,uint8,uint8,uint16,uint16,address,address,uint256,uint256,uint256,uint256))
+        - "0x504006ca" # getLoan(uint256)
+      address: "${LOAN_REGISTRY_ADDRESS}"
+
+    - name: LoanFunding
+      functions:
+        - "0x846b909a" # fundLoan(uint256)
+      address: "${LOAN_FUNDING_ADDRESS}"
+
+    - name: LoanRepayment
+      functions:
+        - "0x84068d15" # repayNextInstallment(uint256)
+      address: "${LOAN_REPAYMENT_ADDRESS}"
+
+    - name: LoanTokenManager
+      functions:
+        - "0xf7888aec" # balanceOf(address,address)
+        - "0x47e7ef24" # deposit(address,uint256)
+        - "0xf3fef3a3" # withdraw(address,uint256)
+      address: "${LOAN_TOKEN_MANAGER_ADDRESS}"
+
+  network:
+    chainId: "${CHAIN_ID}"
+    rpcUrl: "${RPC_URL}"
