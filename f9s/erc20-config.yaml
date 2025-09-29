@@ -1,5 +1,5 @@
 apiVersion: beta/v1
-kind: Diamond
+kind: Deployment
 
 metadata:
   name: stablecoin-contract
@@ -11,13 +11,19 @@ spec:
       type: privateKey
       value: "${DEPLOYER_PRIVATE_KEY}"
 
-  diamond:
+  package:
     name: StableCoin
-    constructorArguments:
-      - "MockUSDC" # PackageController
-      - "mUSDC" # PackageViewer
-      - 6 # Decimals
-      - "${ADMIN_ADDRESS}" # Admin/Owner address
+  
+  constructorArgs:
+    - name: "name_"
+      type: "string"
+      value: "MockUSDC"
+    - name: "symbol_"
+      type: "string"
+      value: "mUSDC"
+    - name: "decimals_"
+      type: "uint8"
+      value: 6
 
   network:
     chainId: "${CHAIN_ID}"
