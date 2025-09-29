@@ -10,12 +10,25 @@ spec:
     wallet:
       type: privateKey
       value: "${DEPLOYER_PRIVATE_KEY}"
+  dependencies:
+    packageViewer:
+      name: PackageViewer
+    packageController:
+      name: PackageController
+    loanRegistry:
+      name: LoanRegistry
+    loanFunding:
+      name: LoanFunding
+    loanRepayment:
+      name: LoanRepayment
+    loanTokenManager:
+      name: LoanTokenManager
 
   diamond:
     name: MicroLoanDiamond
     constructorArguments:
-      - "${PACKAGE_CONTROLLER_ADDRESS}" # PackageController
-      - "${PACKAGE_VIEWER_ADDRESS}" # PackageViewer
+      - $dependencies.packageController.address
+      - $dependencies.packageViewer.address
       - "${ADMIN_ADDRESS}" # Admin/Owner address
 
   packages:
@@ -23,24 +36,24 @@ spec:
       functions:
         - "0xc19fa698" # createLoan((uint8,uint16,bool,bool,uint8,uint8,uint16,uint16,address,address,uint256,uint256,uint256,uint256))
         - "0x504006ca" # getLoan(uint256)
-      address: "${LOAN_REGISTRY_ADDRESS}"
+      address: $dependencies.loanRegistry.address
 
     - name: LoanFunding
       functions:
         - "0x846b909a" # fundLoan(uint256)
-      address: "${LOAN_FUNDING_ADDRESS}"
+      address: $dependencies.loanFunding.address
 
     - name: LoanRepayment
       functions:
         - "0x84068d15" # repayNextInstallment(uint256)
-      address: "${LOAN_REPAYMENT_ADDRESS}"
+      address: $dependencies.loanRepayment.address
 
     - name: LoanTokenManager
       functions:
         - "0xf7888aec" # balanceOf(address,address)
         - "0x47e7ef24" # deposit(address,uint256)
         - "0xf3fef3a3" # withdraw(address,uint256)
-      address: "${LOAN_TOKEN_MANAGER_ADDRESS}"
+      address: $dependencies.loanTokenManager.address
 
   network:
     chainId: "${CHAIN_ID}"
