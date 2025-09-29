@@ -10,6 +10,8 @@ spec:
     wallet:
       type: privateKey
       value: "${DEPLOYER_PRIVATE_KEY}"
+    gasSettings:
+      gasLimit: 3000000
 
   package:
     name: StableCoin
