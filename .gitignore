@@ -24,6 +24,9 @@ node_modules
 .Spotlight-V100
 .Trashes
 
+# Compiled TypeScript output
+dist/
+
 # Prevent compiled JavaScript files in scripts directory
 scripts/**/*.js
 

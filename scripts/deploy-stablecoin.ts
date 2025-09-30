@@ -1,4 +1,5 @@
 import hre from 'hardhat';
+import "@nomicfoundation/hardhat-ethers";
 import dotenv from 'dotenv';
 import { JsonRpcProvider, Wallet } from 'ethers';
 

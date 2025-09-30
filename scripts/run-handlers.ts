@@ -7,6 +7,7 @@ import {
   formatEther,
 } from "ethers";
 import hre from "hardhat";
+import "@nomicfoundation/hardhat-ethers";
 import {
   createLoan,
   fundLoan,
@@ -102,8 +103,8 @@ async function main() {
       lender,
     );
     token = await StableCoin.deploy("MockUSDC", "mUSDC", 6);
-    await token.waitForDeployment();
-    tokenAddress = await token.getAddress();
+    await token!.waitForDeployment();
+    tokenAddress = await token!.getAddress();
     deployedStable = true;
     console.log("StableCoin deployed at:", tokenAddress);
   } else {
@@ -149,8 +150,8 @@ async function main() {
   if (token) {
     try {
       const [lBal, bBal] = await Promise.all([
-        token.connect(lender).balanceOf(lender.address),
-        token.connect(lender).balanceOf(borrower.address),
+        (token as any).connect(lender).balanceOf(lender.address),
+        (token as any).connect(lender).balanceOf(borrower.address),
       ]);
       if (lBal < disbursed) {
         console.warn(
@@ -168,11 +169,11 @@ async function main() {
   // Ensure lender has enough tokens to fund
   if (deployedStable && token) {
     console.log("Minting tokens to lender and borrower for flow...");
-    await (await token.connect(lender).mint(lender.address, disbursed)).wait();
+    await (await (token as any).connect(lender).mint(lender.address, disbursed)).wait();
     // Top up borrower to ensure at least one installment
     const mintBorrower = installment * 2n;
     await (
-      await token.connect(lender).mint(borrower.address, mintBorrower)
+      await (token as any).connect(lender).mint(borrower.address, mintBorrower)
     ).wait();
   }
 

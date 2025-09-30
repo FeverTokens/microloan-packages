@@ -1,4 +1,5 @@
 import hre from 'hardhat';
+import "@nomicfoundation/hardhat-ethers";
 import { deployContract } from './services/packages';
 
 async function main() {
@@ -72,7 +73,7 @@ async function main() {
     // Create interface with PackageViewer ABI to test facetAddresses
     const diamondWithViewer = new hre.ethers.Contract(
       erc3643Diamond.target as string,
-      packageViewerAbi,
+      packageViewerAbi as any,
       admin
     );
     
@@ -85,7 +86,7 @@ async function main() {
     const agentRoleAbi = getAbi('AgentRole');
     const diamondWithAgent = new hre.ethers.Contract(
       erc3643Diamond.target as string,
-      agentRoleAbi,
+      agentRoleAbi as any,
       admin
     );
     
