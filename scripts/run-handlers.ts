@@ -5,6 +5,8 @@ import {
   Contract,
   parseEther,
   formatEther,
+  Interface,
+  BaseContract,
 } from "ethers";
 import hre from "hardhat";
 import "@nomicfoundation/hardhat-ethers";
@@ -24,6 +26,22 @@ const ERC20_ABI = [
   "function mint(address to, uint256 amount)",
   "function balanceOf(address account) view returns (uint256)",
 ];
+
+// Create interface for type safety
+const ERC20_INTERFACE = new Interface(ERC20_ABI);
+
+// Define ERC20 methods interface for better typing
+interface ERC20Methods {
+  balanceOf(account: string): Promise<bigint>;
+  mint(to: string, amount: bigint): Promise<any>;
+  decimals(): Promise<number>;
+  connect(signer: Wallet): Contract & ERC20Methods;
+}
+
+// Helper function to create typed ERC20 contract
+function createERC20Contract(address: string, signer: Wallet): Contract & ERC20Methods {
+  return new Contract(address, ERC20_ABI, signer) as Contract & ERC20Methods;
+}
 
 async function main() {
   const rpcUrl = process.env.RPC_URL;
@@ -93,7 +111,7 @@ async function main() {
 
   // Determine or deploy stablecoin
   let tokenAddress = existingStable;
-  let token: Contract | null = null;
+  let token: (Contract & ERC20Methods) | null = null;
   let deployedStable = false;
 
   if (!tokenAddress) {
@@ -102,13 +120,15 @@ async function main() {
       "StableCoin",
       lender,
     );
-    token = await StableCoin.deploy("MockUSDC", "mUSDC", 6);
-    await token!.waitForDeployment();
-    tokenAddress = await token!.getAddress();
+    const deployedToken = await StableCoin.deploy("MockUSDC", "mUSDC", 6);
+    await deployedToken.waitForDeployment();
+    tokenAddress = await deployedToken.getAddress();
+    // Type assert deployed contract to our ERC20 interface
+    token = deployedToken as Contract & ERC20Methods;
     deployedStable = true;
     console.log("StableCoin deployed at:", tokenAddress);
   } else {
-    token = new Contract(tokenAddress, ERC20_ABI, lender);
+    token = createERC20Contract(tokenAddress, lender);
     console.log("Using existing stablecoin at:", tokenAddress);
   }
 
@@ -149,9 +169,10 @@ async function main() {
   // If using an existing stablecoin, verify balances are sufficient and warn if not
   if (token) {
     try {
+      const connectedToken = token.connect(lender) as Contract & ERC20Methods;
       const [lBal, bBal] = await Promise.all([
-        (token as any).connect(lender).balanceOf(lender.address),
-        (token as any).connect(lender).balanceOf(borrower.address),
+        connectedToken.balanceOf(lender.address),
+        connectedToken.balanceOf(borrower.address),
       ]);
       if (lBal < disbursed) {
         console.warn(
@@ -169,11 +190,12 @@ async function main() {
   // Ensure lender has enough tokens to fund
   if (deployedStable && token) {
     console.log("Minting tokens to lender and borrower for flow...");
-    await (await (token as any).connect(lender).mint(lender.address, disbursed)).wait();
+    const connectedToken = token.connect(lender) as Contract & ERC20Methods;
+    await (await connectedToken.mint(lender.address, disbursed)).wait();
     // Top up borrower to ensure at least one installment
     const mintBorrower = installment * 2n;
     await (
-      await (token as any).connect(lender).mint(borrower.address, mintBorrower)
+      await connectedToken.mint(borrower.address, mintBorrower)
     ).wait();
   }
 

@@ -71,6 +71,12 @@ export function getAbi(contractArtifactName: string): Abi {
   return artifact.abi;
 }
 
+export function getEthersAbi(contractArtifactName: string): InterfaceAbi {
+  const artifact = getContractArtifact(contractArtifactName);
+  // Convert abitype.Abi to ethers InterfaceAbi by JSON serialization
+  return JSON.parse(JSON.stringify(artifact.abi)) as InterfaceAbi;
+}
+
 export function getAbiFunction(contractArtifactName: string, functionName: string): AbiFunction {
   const abi = getAbi(contractArtifactName);
   
