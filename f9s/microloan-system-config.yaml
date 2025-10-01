@@ -9,7 +9,7 @@ spec:
   deployer:
     wallet:
       type: privateKey
-      value: "${DEPLOYER_PRIVATE_KEY}"
+      value: "${PRIVATE_KEY}"
   dependencies:
     packageViewer:
       name: PackageViewer
