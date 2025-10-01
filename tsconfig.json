@@ -1,6 +1,6 @@
 {
    "compilerOptions": {
-      "target": "es2017",
+      "target": "es2020",
       "module": "CommonJS",
       "strict": true,
       "esModuleInterop": true,
@@ -8,7 +8,9 @@
       "forceConsistentCasingInFileNames": true,
       "resolveJsonModule": true,
       "moduleResolution": "node",
-      "types": ["jest", "node"]
+      "types": ["jest", "node", "@nomicfoundation/hardhat-ethers", "@nomicfoundation/hardhat-chai-matchers"],
+      "outDir": "./dist",
+      "noEmit": false
    },
    "include": ["src/**/*.ts", "tests/**/*.ts","types/*.ts","clients/**/*.ts", "scripts/**/*.ts"]
    
