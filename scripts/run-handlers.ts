@@ -123,7 +123,8 @@ async function main() {
     const deployedToken = await StableCoin.deploy("MockUSDC", "mUSDC", 6);
     await deployedToken.waitForDeployment();
     tokenAddress = await deployedToken.getAddress();
-    // Type assert deployed contract to our ERC20 interface
+    // Validate deployed contract implements ERC20 interface before type assertion
+    assertIsERC20(deployedToken);
     token = deployedToken as Contract & ERC20Methods;
     deployedStable = true;
     console.log("StableCoin deployed at:", tokenAddress);
