@@ -5,7 +5,7 @@ import {ILoanFundingInternal} from "./ILoanFundingInternal.sol";
 import {LoanFundingStorage} from "./LoanFundingStorage.sol";
 import "../registry/ILoanRegistryInternal.sol";
 import {LoanRegistryStorage} from "../registry/LoanRegistryStorage.sol";
-import {IERC20} from "../../token/ERC20/IERC20.sol";
+import {IERC20} from "@fevertokens/packages/contracts/token/ERC20/IERC20.sol";
 
 /// @title LoanFunding Internal Logic
 /// @notice Validates and executes loan funding.

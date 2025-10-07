@@ -1,32 +1,28 @@
 apiVersion: beta/v1
-kind: Deployment
+kind: Contract
 
-metadata:
-  name: stablecoin-contract
-  version: 1.0.0
+# metadata:
+#   name: stable-coin-contract
+#   version: 1.0.0
+#   description: "StableCoin contract configuration for ERC20 tokens"
 
 spec:
+  contract:
+    name: StableCoin
+    constructorArgs:
+      - name: "name_"
+        type: "string"
+        value: "MockUSDC"
+      - name: "symbol_"
+        type: "string"
+        value: "mUSDC"
+      - name: "decimals_"
+        type: "uint8"
+        value: 6
+
   deployer:
     wallet:
       type: privateKey
       value: "${PRIVATE_KEY}"
     gasSettings:
       gasLimit: 3000000
-
-  package:
-    name: StableCoin
-
-  constructorArgs:
-    - name: "name_"
-      type: "string"
-      value: "MockUSDC"
-    - name: "symbol_"
-      type: "string"
-      value: "mUSDC"
-    - name: "decimals_"
-      type: "uint8"
-      value: 6
-
-  network:
-    chainId: "${CHAIN_ID}"
-    rpcUrl: "${RPC_URL}"

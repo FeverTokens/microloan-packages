@@ -73,10 +73,16 @@ interface IMicroLoanDiamond {
         uint256 disbursedAmount
     );
 
-    event StatusUpdated(uint256 indexed loanId, LoanStatus oldStatus, LoanStatus newStatus);
+    event StatusUpdated(
+        uint256 indexed loanId,
+        LoanStatus oldStatus,
+        LoanStatus newStatus
+    );
 
     // ===== Loan Registry (read/write) =====
-    function createLoan(LoanParams calldata p) external returns (uint256 loanId);
+    function createLoan(
+        LoanParams calldata p
+    ) external returns (uint256 loanId);
 
     function getLoan(uint256 loanId) external view returns (Loan memory loan);
 
@@ -91,6 +97,8 @@ interface IMicroLoanDiamond {
 
     function withdraw(address token, uint256 amount) external;
 
-    function balanceOf(address user, address token) external view returns (uint256);
+    function balanceOf(
+        address user,
+        address token
+    ) external view returns (uint256);
 }
-
