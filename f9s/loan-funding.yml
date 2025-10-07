@@ -1,5 +1,5 @@
 apiVersion: beta/v1
-kind: Deployment
+kind: Package
 
 metadata:
   name: loan-funding-deployment
@@ -14,8 +14,4 @@ spec:
     wallet:
       type: "privateKey" # Options: privateKey, mnemonic, keystore
       value: "${PRIVATE_KEY}" # Environment variable reference
-
-  network:
-    chainId: "${CHAIN_ID}"
-    rpcUrl: "${RPC_URL}"
 
