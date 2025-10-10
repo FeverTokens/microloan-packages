@@ -2,9 +2,9 @@ apiVersion: beta/v1
 kind: Package
 
 metadata:
-  name: loan-funding-deployment
+  name: loan-funding-package
   version: 1.0.0
-  description: "LoanFunding package deployment for MicroLoan"
+  description: "LoanFunding package for MicroLoan"
 
 spec:
   package:
