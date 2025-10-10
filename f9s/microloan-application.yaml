@@ -17,8 +17,7 @@ spec:
     - name: LoanRegistry
 
     - name: LoanFunding
-      functions:
-        - "*"
+      functions: "*"
 
     - name: LoanRepayment
       functions:
