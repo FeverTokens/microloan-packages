@@ -13,7 +13,9 @@ library PausableStorage {
      * @custom:storage-location erc7201:fevertokens.storage.Pausable
      */
     //
-    bytes32 internal constant STORAGE_SLOT = 0xebcd51003fd5533c59513c252620a545fc9897054eca22522368fea01d3dcc00;
+    bytes32 internal constant STORAGE_SLOT =
+        0xebcd51003fd5533c59513c252620a545fc9897054eca22522368fea01d3dcc00;
+
     // keccak256(abi.encode(uint256(keccak256("fevertokens.storage.Pausable")) - 1)) & ~bytes32(uint256(0xff));
 
     function layout() internal pure returns (Layout storage l) {

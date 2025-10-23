@@ -14,7 +14,9 @@ library ERC1155BaseStorage {
      * @custom:storage-location erc7201:fevertokens.storage.ERC1155Base
      */
     //
-    bytes32 internal constant STORAGE_SLOT = 0xfa365e4df336c5282d22d85a2a7afc76b787bad4b2de3199fa452c9c34d04000;
+    bytes32 internal constant STORAGE_SLOT =
+        0xfa365e4df336c5282d22d85a2a7afc76b787bad4b2de3199fa452c9c34d04000;
+
     // keccak256(abi.encode(uint256(keccak256("fevertokens.storage.ERC1155Base")) - 1)) & ~bytes32(uint256(0xff));
 
     function layout() internal pure returns (Layout storage l) {

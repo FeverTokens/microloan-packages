@@ -28,7 +28,9 @@ library EIP712Storage {
      * @custom:storage-location erc7201:fevertokens.storage.EIP712
      */
     //
-    bytes32 internal constant STORAGE_SLOT = 0x25bd642bde6ccba30d90decc48cf28dd1d98433926125ed62a6aefecd15b0800;
+    bytes32 internal constant STORAGE_SLOT =
+        0x25bd642bde6ccba30d90decc48cf28dd1d98433926125ed62a6aefecd15b0800;
+
     // keccak256(abi.encode(uint256(keccak256("fevertokens.storage.EIP712")) - 1)) & ~bytes32(uint256(0xff));
 
     /**

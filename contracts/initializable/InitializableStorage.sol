@@ -24,7 +24,9 @@ library InitializableStorage {
      * @custom:storage-location erc7201:fevertokens.storage.Initializable
      */
     //
-    bytes32 internal constant STORAGE_SLOT = 0x300dbacb4eae624d21bf53d429940a1e327d6e579697456710cdaa5c67d1f900;
+    bytes32 internal constant STORAGE_SLOT =
+        0x300dbacb4eae624d21bf53d429940a1e327d6e579697456710cdaa5c67d1f900;
+
     //keccak256(abi.encode(uint256(keccak256("fevertokens.storage.Initializable")) - 1)) & ~bytes32(uint256(0xff));
 
     /**

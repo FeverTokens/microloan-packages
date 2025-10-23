@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.26;
 
-import {ILoanRegistryInternal} from "./ILoanRegistryInternal.sol";
+import "./ILoanRegistryInternal.sol";
 import {LoanRegistryStorage} from "./LoanRegistryStorage.sol";
 import {MicroLoanMath} from "../math/MicroLoanMath.sol";
 
@@ -10,11 +10,12 @@ import {MicroLoanMath} from "../math/MicroLoanMath.sol";
 abstract contract LoanRegistryInternal is ILoanRegistryInternal {
     using LoanRegistryStorage for LoanRegistryStorage.Layout;
 
-
     /// @notice Create a loan and initialize computed fields
     /// @param p Parameters supplied by caller
     /// @return loanId Newly allocated loan id
-    function _createLoan(LoanParams memory p) internal returns (uint256 loanId) {
+    function _createLoan(
+        LoanParams memory p
+    ) internal returns (uint256 loanId) {
         require(p.borrower != address(0), "borrower=0");
         require(p.token != address(0), "token=0");
         require(p.loanAmount > 0, "amount=0");
@@ -28,21 +29,29 @@ abstract contract LoanRegistryInternal is ILoanRegistryInternal {
             // If an active id exists but is closed/defaulted, allow; otherwise revert
             Loan storage existing = s.loans[activeId];
             require(
-                existing.status == LoanStatus.Closed || existing.status == LoanStatus.Defaulted,
+                existing.status == LoanStatus.Closed ||
+                    existing.status == LoanStatus.Defaulted,
                 "borrower has active loan"
             );
         }
 
         // Compute fees and cash flows
-        uint256 feeAmount = (p.loanAmount * uint256(p.fileFeeBps)) / MicroLoanMath.BPS;
-        uint256 principalOwed = p.loanAmount + (p.addFeeToPrincipal ? feeAmount : 0);
-        uint256 disbursedAmount = p.loanAmount - (p.feeDeductedUpfront ? feeAmount : 0);
+        uint256 feeAmount = (p.loanAmount * uint256(p.fileFeeBps)) /
+            MicroLoanMath.BPS;
+        uint256 principalOwed = p.loanAmount +
+            (p.addFeeToPrincipal ? feeAmount : 0);
+        uint256 disbursedAmount = p.loanAmount -
+            (p.feeDeductedUpfront ? feeAmount : 0);
 
         // Compute monthly payment for EqualPayments (DecliningBalance)
-        uint256 rMonthlyWad = (uint256(p.interestRateBps) * MicroLoanMath.WAD) / MicroLoanMath.BPS / 12; // APR->monthly, WAD-scaled
-        uint256 installmentAmount =
-            MicroLoanMath.annuityPayment(principalOwed * MicroLoanMath.WAD, rMonthlyWad, p.termInMonths) /
-                MicroLoanMath.WAD;
+        uint256 rMonthlyWad = (uint256(p.interestRateBps) * MicroLoanMath.WAD) /
+            MicroLoanMath.BPS /
+            12; // APR->monthly, WAD-scaled
+        uint256 installmentAmount = MicroLoanMath.annuityPayment(
+            principalOwed * MicroLoanMath.WAD,
+            rMonthlyWad,
+            p.termInMonths
+        ) / MicroLoanMath.WAD;
 
         // Assign ID and populate state
         s.lastId += 1;
@@ -65,7 +74,13 @@ abstract contract LoanRegistryInternal is ILoanRegistryInternal {
         // mark borrower as having an active loan id upon creation
         s.borrowerActiveLoanId[p.borrower] = loanId;
 
-        emit LoanCreated(loanId, p.borrower, p.token, principalOwed, disbursedAmount);
+        emit LoanCreated(
+            loanId,
+            p.borrower,
+            p.token,
+            principalOwed,
+            disbursedAmount
+        );
     }
 
     /// @notice Get a copy of Loan state
@@ -86,7 +101,9 @@ abstract contract LoanRegistryInternal is ILoanRegistryInternal {
         emit StatusUpdated(loanId, old, newStatus);
 
         // Maintain active loan pointer
-        if (newStatus == LoanStatus.Closed || newStatus == LoanStatus.Defaulted) {
+        if (
+            newStatus == LoanStatus.Closed || newStatus == LoanStatus.Defaulted
+        ) {
             if (s.borrowerActiveLoanId[l.params.borrower] == loanId) {
                 s.borrowerActiveLoanId[l.params.borrower] = 0;
             }

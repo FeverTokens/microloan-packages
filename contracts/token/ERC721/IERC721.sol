@@ -29,7 +29,11 @@ interface IERC721 is IERC721Internal {
      * @param to receiver of token
      * @param tokenId token id
      */
-    function safeTransferFrom(address from, address to, uint256 tokenId) external payable;
+    function safeTransferFrom(
+        address from,
+        address to,
+        uint256 tokenId
+    ) external payable;
 
     /**
      * @notice transfer token between given addresses, checking for ERC721Receiver implementation if applicable
@@ -38,7 +42,12 @@ interface IERC721 is IERC721Internal {
      * @param tokenId token id
      * @param data data payload
      */
-    function safeTransferFrom(address from, address to, uint256 tokenId, bytes calldata data) external payable;
+    function safeTransferFrom(
+        address from,
+        address to,
+        uint256 tokenId,
+        bytes calldata data
+    ) external payable;
 
     /**
      * @notice transfer token between given addresses, without checking for ERC721Receiver implementation if applicable
@@ -46,7 +55,11 @@ interface IERC721 is IERC721Internal {
      * @param to receiver of token
      * @param tokenId token id
      */
-    function transferFrom(address from, address to, uint256 tokenId) external payable;
+    function transferFrom(
+        address from,
+        address to,
+        uint256 tokenId
+    ) external payable;
 
     /**
      * @notice grant approval to given account to spend token
@@ -60,7 +73,9 @@ interface IERC721 is IERC721Internal {
      * @param tokenId token to query
      * @return operator address approved to spend token
      */
-    function getApproved(uint256 tokenId) external view returns (address operator);
+    function getApproved(
+        uint256 tokenId
+    ) external view returns (address operator);
 
     /**
      * @notice grant approval to or revoke approval from given account to spend all tokens held by sender
@@ -75,5 +90,8 @@ interface IERC721 is IERC721Internal {
      * @param operator address to query for approval received
      * @return status whether operator is approved to spend tokens held by account
      */
-    function isApprovedForAll(address account, address operator) external view returns (bool status);
+    function isApprovedForAll(
+        address account,
+        address operator
+    ) external view returns (bool status);
 }

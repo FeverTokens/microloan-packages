@@ -10,7 +10,10 @@ import {InitializableInternal} from "../initializable/InitializableInternal.sol"
 /**
  * @title Internal functions for ReeantrancyGuard security control module.
  */
-abstract contract ReentrancyGuardInternal is IReentrancyGuardInternal, InitializableInternal {
+abstract contract ReentrancyGuardInternal is
+    IReentrancyGuardInternal,
+    InitializableInternal
+{
     // Booleans are more expensive than uint256 or any type that takes up a full
     // word because each write operation emits an extra SLOAD to first read the
     // slot's contents, replace the bits taken up by the boolean, and then write
@@ -30,7 +33,8 @@ abstract contract ReentrancyGuardInternal is IReentrancyGuardInternal, Initializ
     }
 
     function __ReentrancyGuard_init_unchained() internal {
-        ReentrancyGuardStorage.Layout storage l = ReentrancyGuardStorage.layout();
+        ReentrancyGuardStorage.Layout storage l = ReentrancyGuardStorage
+            .layout();
         l.status = _NOT_ENTERED;
     }
 
