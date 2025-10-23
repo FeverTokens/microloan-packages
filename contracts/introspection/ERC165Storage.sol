@@ -13,7 +13,9 @@ library ERC165Storage {
      * @custom:storage-location erc7201:fevertokens.storage.ERC165
      */
     //
-    bytes32 internal constant STORAGE_SLOT = 0xb5b8963eb69caba739dcbcf25496d25c11c82c55d18d8b19fd10f0dde3a5db00;
+    bytes32 internal constant STORAGE_SLOT =
+        0xb5b8963eb69caba739dcbcf25496d25c11c82c55d18d8b19fd10f0dde3a5db00;
+
     //  keccak256(abi.encode(uint256(keccak256("fevertokens.storage.ERC165")) - 1)) & ~bytes32(uint256(0xff));
 
     function layout() internal pure returns (Layout storage l) {

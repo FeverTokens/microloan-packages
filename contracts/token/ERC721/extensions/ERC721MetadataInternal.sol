@@ -11,7 +11,10 @@ import {UintUtils} from "../../../utils/UintUtils.sol";
 /**
  * @title ERC721Metadata internal functions
  */
-abstract contract ERC721MetadataInternal is IERC721MetadataInternal, ERC721BaseInternal {
+abstract contract ERC721MetadataInternal is
+    IERC721MetadataInternal,
+    ERC721BaseInternal
+{
     using UintUtils for uint256;
 
     /**
@@ -34,7 +37,9 @@ abstract contract ERC721MetadataInternal is IERC721MetadataInternal, ERC721BaseI
      * @notice get generated URI for given token
      * @return token URI
      */
-    function _tokenURI(uint256 tokenId) internal view virtual returns (string memory) {
+    function _tokenURI(
+        uint256 tokenId
+    ) internal view virtual returns (string memory) {
         if (!_exists(tokenId)) revert("ERC721Metadata: Non Existent Token");
 
         ERC721MetadataStorage.Layout storage l = ERC721MetadataStorage.layout();
@@ -55,7 +60,11 @@ abstract contract ERC721MetadataInternal is IERC721MetadataInternal, ERC721BaseI
      * @notice ERC721 hook: clear per-token URI data on burn
      * @inheritdoc ERC721BaseInternal
      */
-    function _beforeTokenTransfer(address from, address to, uint256 tokenId) internal virtual override {
+    function _beforeTokenTransfer(
+        address from,
+        address to,
+        uint256 tokenId
+    ) internal virtual override {
         super._beforeTokenTransfer(from, to, tokenId);
 
         if (to == address(0)) {

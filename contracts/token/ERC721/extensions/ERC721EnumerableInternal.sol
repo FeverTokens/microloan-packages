@@ -16,11 +16,16 @@ abstract contract ERC721EnumerableInternal {
         return ERC721BaseStorage.layout().tokenOwners.length();
     }
 
-    function _tokenOfOwnerByIndex(address owner, uint256 index) internal view returns (uint256) {
+    function _tokenOfOwnerByIndex(
+        address owner,
+        uint256 index
+    ) internal view returns (uint256) {
         return ERC721BaseStorage.layout().holderTokens[owner].at(index);
     }
 
-    function _tokenByIndex(uint256 index) internal view returns (uint256 tokenId) {
+    function _tokenByIndex(
+        uint256 index
+    ) internal view returns (uint256 tokenId) {
         (tokenId, ) = ERC721BaseStorage.layout().tokenOwners.at(index);
     }
 }

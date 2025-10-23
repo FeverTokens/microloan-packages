@@ -17,7 +17,9 @@ library ERC1155MetadataStorage {
      * @custom:storage-location erc7201:fevertokens.storage.ERC1155Metadata
      */
     //
-    bytes32 internal constant STORAGE_SLOT = 0x28fc3dc02aeda1eeabf348e3bec1bec10c11bd41c8cef9f87114b47cb3c1ba00;
+    bytes32 internal constant STORAGE_SLOT =
+        0x28fc3dc02aeda1eeabf348e3bec1bec10c11bd41c8cef9f87114b47cb3c1ba00;
+
     // keccak256(abi.encode(uint256(keccak256("fevertokens.storage.ERC1155Metadata")) - 1)) & ~bytes32(uint256(0xff));
 
     function layout() internal pure returns (Layout storage l) {

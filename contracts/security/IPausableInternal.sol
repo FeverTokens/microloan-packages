@@ -4,9 +4,6 @@
 pragma solidity 0.8.26;
 
 interface IPausableInternal {
-    error Pausable__Paused();
-    error Pausable__NotPaused();
-
     /**
      * @dev Emitted when the pause is triggered by `account`.
      */
@@ -16,4 +13,7 @@ interface IPausableInternal {
      * @dev Emitted when the pause is lifted by `account`.
      */
     event Unpaused(address account);
+
+    error Pausable__Paused();
+    error Pausable__NotPaused();
 }

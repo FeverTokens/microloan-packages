@@ -20,7 +20,9 @@ library ERC20SnapshotStorage {
      * @custom:storage-location erc7201:fevertokens.storage.ERC20Snapshot
      */
     //
-    bytes32 internal constant STORAGE_SLOT = 0xa6697c98d1bb1793c27f3449917b2ef0d302ddb2978a230fa460435688af6300;
+    bytes32 internal constant STORAGE_SLOT =
+        0xa6697c98d1bb1793c27f3449917b2ef0d302ddb2978a230fa460435688af6300;
+
     //keccak256(abi.encode(uint256(keccak256("fevertokens.storage.ERC20Snapshot")) - 1)) & ~bytes32(uint256(0xff));
 
     function layout() internal pure returns (Layout storage l) {

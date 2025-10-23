@@ -16,7 +16,9 @@ library ERC721MetadataStorage {
      * @custom:storage-location erc7201:fevertokens.storage.ERC721Metadata
      */
     //
-    bytes32 internal constant STORAGE_SLOT = 0x227733841f7b274a39c8b02b70ab2bce4c4f44d63cfc7360947939ab90892900;
+    bytes32 internal constant STORAGE_SLOT =
+        0x227733841f7b274a39c8b02b70ab2bce4c4f44d63cfc7360947939ab90892900;
+
     //keccak256(abi.encode(uint256(keccak256("fevertokens.storage.ERC721Metadata")) - 1)) & ~bytes32(uint256(0xff));
 
     function layout() internal pure returns (Layout storage l) {
