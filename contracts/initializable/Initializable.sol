@@ -11,7 +11,7 @@ import "./InitializableInternal.sol";
  * @notice This contract provides the functionality to initialize facets/packages with the given initialization data.
  * @dev This contract inherits from IInitializable and InitializableInternal, exposing public functions to be called through the Diamond Proxy through `delegatecall`.
  */
-contract InitializablePackage is IInitializable, InitializableInternal {
+contract Initializable is IInitializable, InitializableInternal {
     /**
      * @inheritdoc IInitializable
      */
