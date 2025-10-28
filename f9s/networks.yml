@@ -1,6 +1,6 @@
 apiVersion: beta/v1
 kind: Network
-defaultNetwork: 11155111
+defaultNetwork: 1337
 networks:
   - chainId: 1337
     name: Localhost
