@@ -207,7 +207,7 @@ export async function deployERC3643(admin: Signer, manager?: Signer, relayer?: S
 
   // Deploy ERC3643 diamond
 
-  const erc3643DiamondContract = await deployContract('MicroLoanDiamond', admin, [
+  const erc3643DiamondContract = await deployContract('MicroLoanPackageSystem', admin, [
     packageControllerAddress,
     packageViewerAddress,
     initializerPackageAddress,
@@ -217,7 +217,7 @@ export async function deployERC3643(admin: Signer, manager?: Signer, relayer?: S
 
   const erc3643DiamondAddress = await erc3643DiamondContract.getAddress();
 
-  const erc3643Artifact = getContractArtifact('MicroLoanDiamond');
+  const erc3643Artifact = getContractArtifact('MicroLoanPackageSystem');
   const erc3643Bytecode = erc3643Artifact.bytecode as BytesLike;
 
   let erc3643Abi: Abi[] = [];

@@ -40,7 +40,7 @@ describe("Microloan Lifecycle", function () {
     console.log("LoanTokenManager Cut:", tokenMgrCut);
 
     // Deploy diamond (constructor should add PackageController and PackageViewer facets)
-    const diamond = await deployContract("MicroLoanDiamond", deployer, [
+    const diamond = await deployContract("MicroLoanPackageSystem", deployer, [
       packageController.target,
       packageViewer.target,
       deployer.address,

@@ -1,13 +1,13 @@
 apiVersion: beta/v1
-kind: Application
+kind: PackageSystem
 
 metadata:
   name: microloan-application
   version: 1.0.0
 
 spec:
-  application:
-    name: MicroLoanDiamond
+  system:
+    name: MicroLoanPackageSystem
     constructorArgs:
       - $dependencies.packageController.address
       - $dependencies.packageViewer.address

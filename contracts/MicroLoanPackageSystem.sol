@@ -7,10 +7,10 @@ import {IPackageViewer} from "@fevertokens/packages/contracts/diamond/view/IPack
 import {IInitializable} from "@fevertokens/packages/contracts/initializable/IInitializable.sol";
 import {Proxy} from "@fevertokens/packages/contracts/diamond/proxy/Proxy.sol";
 
-/// @title MicroLoanDiamond
+/// @title MicroLoanPackageSystem
 /// @notice Minimal Diamond proxy wired with PackageController, PackageViewer, and Initializable facets.
 
-contract MicroLoanDiamond is
+contract MicroLoanPackageSystem is
     IDiamondBase,
     DiamondBase,
     PackageControllerInternal

@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.26;
 
-/// @title IMicroLoanDiamond
-/// @notice Unified interface exposing all Microloan package functions and types on the Diamond.
+/// @title IMicroLoanPackageSystem
+/// @notice Unified interface exposing all Microloan package functions and types on the Package System.
 /// @dev This aggregates the Loan Registry, Funding, Repayment, and Token Manager interfaces.
-interface IMicroLoanDiamond {
+interface IMicroLoanPackageSystem {
     // ===== Enums =====
     enum InterestType {
         DecliningBalance,
