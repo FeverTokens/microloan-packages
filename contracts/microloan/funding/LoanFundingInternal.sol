@@ -5,7 +5,7 @@ import {ILoanFundingInternal} from "./ILoanFundingInternal.sol";
 import {LoanFundingStorage} from "./LoanFundingStorage.sol";
 import {ILoanRegistryInternal} from "../registry/ILoanRegistryInternal.sol";
 import {LoanRegistryStorage} from "../registry/LoanRegistryStorage.sol";
-import {IERC20} from "../../token/ERC20/IERC20.sol";
+import {IERC20} from "@fevertokens/packages/contracts/token/ERC20/IERC20.sol";
 
 /// @title LoanFunding Internal Logic
 /// @notice Validates and executes loan funding.
@@ -23,7 +23,11 @@ abstract contract LoanFundingInternal is ILoanFundingInternal {
 
         // record lender and transfer funds to borrower
         l.lender = msg.sender;
-        IERC20(l.params.token).transferFrom(msg.sender, l.params.borrower, l.disbursedAmount);
+        IERC20(l.params.token).transferFrom(
+            msg.sender,
+            l.params.borrower,
+            l.disbursedAmount
+        );
 
         // status → Funded
         ILoanRegistryInternal.LoanStatus old = l.status;
@@ -35,4 +39,3 @@ abstract contract LoanFundingInternal is ILoanFundingInternal {
         old; // silence unused var in case of removal of registry event coupling
     }
 }
-

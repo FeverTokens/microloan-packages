@@ -6,13 +6,12 @@ import {LoanRepaymentStorage} from "./LoanRepaymentStorage.sol";
 import {ILoanRegistryInternal} from "../registry/ILoanRegistryInternal.sol";
 import {LoanRegistryStorage} from "../registry/LoanRegistryStorage.sol";
 import {MicroLoanMath} from "../math/MicroLoanMath.sol";
-import {IERC20} from "../../token/ERC20/IERC20.sol";
+import {IERC20} from "@fevertokens/packages/contracts/token/ERC20/IERC20.sol";
 
 /// @title LoanRepayment Internal Logic
 /// @notice Processes equal-payment schedule repayments and status transitions.
 abstract contract LoanRepaymentInternal is ILoanRepaymentInternal {
     using LoanRepaymentStorage for LoanRepaymentStorage.Layout;
-
 
     /// @notice Repay the next due installment based on stored schedule parameters
     /// @param loanId Loan identifier
@@ -28,9 +27,14 @@ abstract contract LoanRepaymentInternal is ILoanRepaymentInternal {
         require(msg.sender == l.params.borrower, "only borrower");
 
         // Compute interest for period using monthly rate
-        uint256 rMonthlyWad = (uint256(l.params.interestRateBps) * MicroLoanMath.WAD) / MicroLoanMath.BPS / 12;
-        uint256 interestDue =
-            MicroLoanMath.wMul(l.outstandingPrincipal * MicroLoanMath.WAD, rMonthlyWad) / MicroLoanMath.WAD;
+        uint256 rMonthlyWad = (uint256(l.params.interestRateBps) *
+            MicroLoanMath.WAD) /
+            MicroLoanMath.BPS /
+            12;
+        uint256 interestDue = MicroLoanMath.wMul(
+            l.outstandingPrincipal * MicroLoanMath.WAD,
+            rMonthlyWad
+        ) / MicroLoanMath.WAD;
 
         // Use preset installment amount; clamp last payment
         uint256 installment = l.installmentAmount;
@@ -41,7 +45,11 @@ abstract contract LoanRepaymentInternal is ILoanRepaymentInternal {
         uint256 principalPaid = installment - interestDue;
 
         // transfer payment borrower -> lender
-        IERC20(l.params.token).transferFrom(l.params.borrower, l.lender, installment);
+        IERC20(l.params.token).transferFrom(
+            l.params.borrower,
+            l.lender,
+            installment
+        );
 
         // update accounting
         l.outstandingPrincipal -= principalPaid;
@@ -58,7 +66,13 @@ abstract contract LoanRepaymentInternal is ILoanRepaymentInternal {
             l.status = ILoanRegistryInternal.LoanStatus.Active;
         }
 
-        emit LoanInstallmentRepaid(loanId, msg.sender, interestDue, principalPaid, l.outstandingPrincipal);
+        emit LoanInstallmentRepaid(
+            loanId,
+            msg.sender,
+            interestDue,
+            principalPaid,
+            l.outstandingPrincipal
+        );
 
         if (l.outstandingPrincipal == 0 || l.remainingPeriods == 0) {
             l.status = ILoanRegistryInternal.LoanStatus.Closed;

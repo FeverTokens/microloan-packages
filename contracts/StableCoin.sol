@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.26;
 
-import {IERC20} from "./token/ERC20/IERC20.sol";
+import {IERC20} from "@fevertokens/packages/contracts/token/ERC20/IERC20.sol";
 
 /// @title StableCoin
 /// @notice Minimal ERC20-like token for testing microloan flows.
