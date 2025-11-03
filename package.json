@@ -60,7 +60,7 @@
   "dependencies": {
     "@ethersproject/abi": "^5.7.0",
     "@ethersproject/bytes": "^5.7.0",
-    "@fevertokens/packages": "file:fevertokens-packages-0.0.1.tgz",
+    "@fevertokens/packages": "^0.0.1",
     "@openzeppelin/contracts": "^5.0.2",
     "@types/dotenv": "^8.2.0",
     "@walletconnect/ethereum-provider": "^2.12.2",
