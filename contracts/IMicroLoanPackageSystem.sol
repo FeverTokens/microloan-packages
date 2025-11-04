@@ -80,9 +80,7 @@ interface IMicroLoanPackageSystem {
     );
 
     // ===== Loan Registry (read/write) =====
-    function createLoan(
-        LoanParams calldata p
-    ) external returns (uint256 loanId);
+    function createLoan(LoanParams calldata p) external returns (uint256 loanId);
 
     function getLoan(uint256 loanId) external view returns (Loan memory loan);
 
