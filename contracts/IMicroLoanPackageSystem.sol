@@ -95,8 +95,5 @@ interface IMicroLoanPackageSystem {
 
     function withdraw(address token, uint256 amount) external;
 
-    function balanceOf(
-        address user,
-        address token
-    ) external view returns (uint256);
+    function balanceOf(address user, address token) external view returns (uint256);
 }
