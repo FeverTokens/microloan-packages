@@ -1,4 +1,4 @@
-apiVersion: beta/v4
+apiVersion: beta/v1
 kind: Contract
 
 metadata:
