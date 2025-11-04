@@ -8,36 +8,12 @@ networks:
     type: local
     rpcUrl: http://localhost:8545
     isCustom: false
-    addedAt: '2025-10-07T16:18:37.254Z'
+    addedAt: "2025-10-07T16:18:37.254Z"
   - chainId: 11155111
     name: Ethereum Sepolia
     symbol: ETH
     type: testnet
-    rpcUrl: https://sepolia.infura.io/v3/98a728509e2a417c9721ef23cfaae151
+    rpcUrl: https://sepolia.drpc.org
     isCustom: false
-    addedAt: '2025-10-07T16:18:53.396Z'
+    addedAt: "2025-10-07T16:18:53.396Z"
     blockExplorerUrl: https://sepolia.etherscan.io
-  - chainId: 11155420
-    name: OP Sepolia Testnet
-    symbol: ETH
-    type: testnet
-    rpcUrl: https://sepolia.optimism.io
-    isCustom: false
-    addedAt: '2025-11-03T16:04:23.984Z'
-    blockExplorerUrl: https://sepolia-optimism.etherscan.io
-  - chainId: 1
-    name: ether
-    symbol: ETH
-    type: testnet
-    rpcUrl: ' https://sepolia.optimism.io'
-    isCustom: true
-    addedAt: '2025-11-03T16:11:07.856Z'
-customNetworks:
-  - chainId: 1
-    name: ether
-    symbol: ETH
-    rpcUrls:
-      - ' https://sepolia.optimism.io'
-    blockExplorerUrls: []
-    isTestnet: true
-    addedAt: '2025-11-03T16:11:07.856Z'
