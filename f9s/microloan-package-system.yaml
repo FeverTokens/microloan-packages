@@ -1,0 +1,41 @@
+apiVersion: beta/v1
+kind: PackageSystem
+
+metadata:
+  name: microloan-application
+  version: 1.0.0
+
+spec:
+  system:
+    name: MicroLoanPackageSystem
+    constructorArgs:
+      - $dependencies.packageController.address
+      - $dependencies.packageViewer.address
+      - ${ADMIN_ADDRESS}
+
+  packages:
+    - name: LoanRegistry
+
+    - name: LoanFunding
+      functions: "*"
+
+    - name: LoanRepayment
+      functions:
+        - repayNextInstallment(uint256)
+
+    - name: LoanTokenManager
+      functions:
+        - balanceOf(address,address)
+        - deposit
+        - withdraw
+
+  dependencies:
+    packageViewer:
+      name: PackageViewer
+    packageController:
+      name: PackageController
+
+  deployer:
+    wallet:
+      type: privateKey
+      value: "${PRIVATE_KEY}"

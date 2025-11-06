@@ -1,10 +1,10 @@
 apiVersion: beta/v1
-kind: Deployment
+kind: Package
 
 metadata:
-  name: package-controller-deployment
+  name: package-controller-package
   version: 1.0.0
-  description: "PackageController deployment"
+  description: "PackageController package"
 
 spec:
   package:
@@ -15,6 +15,3 @@ spec:
       type: "privateKey" # Options: privateKey, mnemonic, keystore
       value: "${PRIVATE_KEY}" # Environment variable reference
 
-  network:
-    chainId: "${CHAIN_ID}" # Blockchainchain ID
-    rpcUrl: "${RPC_URL}" # Avalanche Private L1RPC

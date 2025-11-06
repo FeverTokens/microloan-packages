@@ -1,0 +1,46 @@
+apiVersion: beta/v1
+kind: Network
+defaultNetwork: 1337
+networks:
+  - chainId: 1337
+    name: Localhost
+    symbol: ETH
+    type: local
+    rpcUrl: http://localhost:8545
+    isCustom: false
+    addedAt: '2025-10-07T16:18:37.254Z'
+  - chainId: 11155111
+    name: Ethereum Sepolia
+    symbol: ETH
+    type: testnet
+    rpcUrl: https://eth-sepolia.g.alchemy.com/v2/demo
+    isCustom: false
+    addedAt: '2025-11-04T16:34:36.747Z'
+    rpcUrls:
+      - https://eth-sepolia.g.alchemy.com/v2/demo
+      - https://sepolia.gateway.tenderly.co
+      - https://gateway.tenderly.co/public/sepolia
+    blockExplorerUrl: https://sepolia.etherscan.io
+  - chainId: 1
+    name: Ethereum Mainnet
+    symbol: ETH
+    type: mainnet
+    rpcUrl: https://go.getblock.io/aefd01aa907c4805ba3c00a9e5b48c6b
+    isCustom: false
+    addedAt: '2025-11-04T16:37:05.461Z'
+    rpcUrls:
+      - https://go.getblock.io/aefd01aa907c4805ba3c00a9e5b48c6b
+      - https://ethereum-rpc.publicnode.com
+      - https://eth.llamarpc.com
+    blockExplorerUrl: https://etherscan.io
+  - chainId: 11142220
+    name: Celo Sepolia Testnet
+    symbol: CELO
+    type: testnet
+    rpcUrl: https://rpc.ankr.com/celo_sepolia
+    isCustom: false
+    addedAt: '2025-11-04T16:37:41.181Z'
+    rpcUrls:
+      - https://rpc.ankr.com/celo_sepolia
+      - https://celo-sepolia.gateway.tatum.io
+      - https://forno.celo-sepolia.celo-testnet.org

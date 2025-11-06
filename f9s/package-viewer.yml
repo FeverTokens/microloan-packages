@@ -1,10 +1,10 @@
 apiVersion: beta/v1
-kind: Deployment
+kind: Package
 
 metadata:
-  name: package-viewer-deployment
+  name: package-viewer-package
   version: 1.0.0
-  description: "PackageViewer deployment"
+  description: "PackageViewer package"
 
 spec:
   package:
@@ -15,6 +15,3 @@ spec:
       type: "privateKey" # Options: privateKey, mnemonic, keystore
       value: "${PRIVATE_KEY}" # Environment variable reference
 
-  network:
-    chainId: "${CHAIN_ID}" # Blockchainchain ID
-    rpcUrl: "${RPC_URL}" # Avalanche Private L1RPC

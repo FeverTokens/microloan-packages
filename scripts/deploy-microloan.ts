@@ -27,15 +27,15 @@ async function main() {
     const agentRole = await deployContract('AgentRole', admin);
     console.log('AgentRole deployed to:', agentRole.target);
 
-    console.log('\n5. Deploying MicroLoanDiamond...');
-    const erc3643Diamond = await deployContract('MicroLoanDiamond', admin, [
+    console.log('\n5. Deploying MicroLoanPackageSystem...');
+    const erc3643Diamond = await deployContract('MicroLoanPackageSystem', admin, [
       packageController.target,
       packageViewer.target,
       initializablePackage.target,
       agentRole.target,
       admin.address
     ]);
-    console.log('MicroLoanDiamond deployed to:', erc3643Diamond.target);
+    console.log('MicroLoanPackageSystem deployed to:', erc3643Diamond.target);
 
     // Deploy supporting ERC3643 contracts
     console.log('\n6. Deploying ERC3643 supporting contracts...');
@@ -57,7 +57,7 @@ async function main() {
 
     console.log('\n✅ All contracts deployed successfully!');
     console.log('\nSummary:');
-    console.log(`MicroLoanDiamond: ${erc3643Diamond.target}`);
+    console.log(`MicroLoanPackageSystem: ${erc3643Diamond.target}`);
     console.log(`Token: ${token.target}`);
     console.log(`IdentityRegistry: ${identityRegistry.target}`);
     console.log(`Compliance: ${compliance.target}`);

@@ -6,7 +6,7 @@ import {LoanRepaymentStorage} from "./LoanRepaymentStorage.sol";
 import "../registry/ILoanRegistryInternal.sol";
 import {LoanRegistryStorage} from "../registry/LoanRegistryStorage.sol";
 import {MicroLoanMath} from "../math/MicroLoanMath.sol";
-import {IERC20} from "../../token/ERC20/IERC20.sol";
+import {IERC20} from "@fevertokens/packages/contracts/token/ERC20/IERC20.sol";
 
 /// @title LoanRepayment Internal Logic
 /// @notice Processes equal-payment schedule repayments and status transitions.

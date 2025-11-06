@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.26;
 
-/// @title IMicroLoanDiamond
-/// @notice Unified interface exposing all Microloan package functions and types on the Diamond.
+/// @title IMicroLoanPackageSystem
+/// @notice Unified interface exposing all Microloan package functions and types on the Package System.
 /// @dev This aggregates the Loan Registry, Funding, Repayment, and Token Manager interfaces.
-interface IMicroLoanDiamond {
+interface IMicroLoanPackageSystem {
     // ===== Enums =====
     enum InterestType {
         DecliningBalance,
@@ -73,7 +73,11 @@ interface IMicroLoanDiamond {
         uint256 disbursedAmount
     );
 
-    event StatusUpdated(uint256 indexed loanId, LoanStatus oldStatus, LoanStatus newStatus);
+    event StatusUpdated(
+        uint256 indexed loanId,
+        LoanStatus oldStatus,
+        LoanStatus newStatus
+    );
 
     // ===== Loan Registry (read/write) =====
     function createLoan(LoanParams calldata p) external returns (uint256 loanId);
@@ -93,4 +97,3 @@ interface IMicroLoanDiamond {
 
     function balanceOf(address user, address token) external view returns (uint256);
 }
-

@@ -1,16 +1,16 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.26;
 
-import {IDiamondBase, DiamondBase} from "./diamond/base/DiamondBase.sol";
-import {FacetCutAction, FacetCut, IPackageController, PackageControllerInternal} from "./diamond/control/PackageController.sol";
-import {IPackageViewer} from "./diamond/view/IPackageViewer.sol";
-import {IInitializable} from "./initializable/IInitializable.sol";
-import {Proxy} from "./diamond/proxy/Proxy.sol";
+import {IDiamondBase, DiamondBase} from "@fevertokens/packages/contracts/diamond/base/DiamondBase.sol";
+import {FacetCutAction, FacetCut, IPackageController, PackageControllerInternal} from "@fevertokens/packages/contracts/diamond/control/PackageController.sol";
+import {IPackageViewer} from "@fevertokens/packages/contracts/diamond/view/IPackageViewer.sol";
+import {IInitializable} from "@fevertokens/packages/contracts/initializable/IInitializable.sol";
+import {Proxy} from "@fevertokens/packages/contracts/diamond/proxy/Proxy.sol";
 
-/// @title MicroLoanDiamond
+/// @title MicroLoanPackageSystem
 /// @notice Minimal Diamond proxy wired with PackageController, PackageViewer, and Initializable facets.
 
-contract MicroLoanDiamond is
+contract MicroLoanPackageSystem is
     IDiamondBase,
     DiamondBase,
     PackageControllerInternal
