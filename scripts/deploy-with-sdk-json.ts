@@ -140,15 +140,6 @@ async function main() {
     console.log(chalk.gray(`   Address: ${deployerAddress}`));
     console.log();
 
-    // Get the manifest file path
-    const manifestPath = resolve(
-      __dirname,
-      "../f9s/microloan-package-system.yaml",
-    );
-    console.log(chalk.yellow("📄 Loading manifest..."));
-    console.log(chalk.gray(`   Path: ${manifestPath}`));
-    console.log();
-
     // Verify network connectivity
     console.log(chalk.yellow("🔌 Verifying network connectivity..."));
     const connectedChainId = await deployer.getChainId();
@@ -159,11 +150,67 @@ async function main() {
     // Try deploying from manifest
     console.log(chalk.yellow("🚀 Attempting deployment from manifest..."));
     try {
-      const result = await deployer.deployFromFile(manifestPath, {
-        skipConfirmation: true,
-        forceRedeploy: false,
-      });
-
+      const result = await deployer.deploy(
+        {
+          apiVersion: "beta/v1",
+          kind: "PackageSystem",
+          metadata: {
+            name: "microloan-application",
+            version: "1.0.0",
+          },
+          spec: {
+            system: {
+              name: "MicroLoanPackageSystem",
+              constructorArgs: [
+                "$dependencies.packageController.address",
+                "$dependencies.packageViewer.address",
+                "${ADMIN_ADDRESS}",
+              ],
+            },
+            packages: [
+              {
+                name: "LoanRegistry",
+                address: "0xB7f8BC63BbcaD18155201308C8f3540b07f84F5e",
+              },
+              {
+                name: "LoanFunding",
+                functions: "*",
+              },
+              {
+                name: "LoanRepayment",
+                functions: ["repayNextInstallment(uint256)"],
+              },
+              {
+                name: "LoanTokenManager",
+                functions: [
+                  "balanceOf(address,address)",
+                  "deposit",
+                  "withdraw",
+                ],
+              },
+            ],
+            dependencies: {
+              packageViewer: {
+                name: "PackageViewer",
+              },
+              packageController: {
+                name: "PackageController",
+              },
+            },
+            deployer: {
+              wallet: {
+                type: "privateKey",
+                value: "${PRIVATE_KEY}",
+              },
+            },
+          },
+        },
+        {
+          skipConfirmation: true,
+          forceRedeploy: false,
+        },
+      );
+      console.log(" result : %j", result);
       console.log(chalk.green("✅ Deployment successful!"));
       console.log(chalk.cyan("📦 Deployment details:"));
       console.log(chalk.gray(`   Contract: ${result.contractName}`));

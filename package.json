@@ -18,6 +18,7 @@
   "scripts": {
     "build": "tsc",
     "deploy:stablecoin": "hardhat run scripts/deploy-stablecoin.ts",
+    "deploy:sdk:json": "tsx scripts/deploy-with-sdk-json.ts",
     "deploy:sdk": "tsx scripts/deploy-with-sdk.ts",
     "deploy:simple": "tsx scripts/deploy-simple-storage.ts",
     "sdk:erc20-yaml": "tsx scripts/sdk/deploy-erc20-yaml.ts",
