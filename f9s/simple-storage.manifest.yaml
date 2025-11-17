@@ -1,0 +1,19 @@
+apiVersion: beta/v1
+kind: Contract
+
+metadata:
+  name: simple-storage-deployment
+  version: 1.0.0
+  description: Deploy SimpleStorage contract with SDK
+
+spec:
+  deployer:
+    wallet:
+      type: privateKey
+      value: '${PRIVATE_KEY}'
+
+  contract:
+    name: SimpleStorage
+    constructorArgs:
+      - value: 42
+        type: uint256

@@ -1,0 +1,40 @@
+{
+  "apiVersion": "beta/v1",
+  "kind": "Contract",
+  "metadata": {
+    "name": "stable-coin-contract",
+    "version": "1.0.0",
+    "description": "StableCoin contract configuration for ERC20 tokens (JSON format)"
+  },
+  "spec": {
+    "contract": {
+      "name": "StableCoin",
+      "constructorArgs": [
+        {
+          "name": "name_",
+          "type": "string",
+          "value": "MockUSDC"
+        },
+        {
+          "name": "symbol_",
+          "type": "string",
+          "value": "mUSDC"
+        },
+        {
+          "name": "decimals_",
+          "type": "uint8",
+          "value": 6
+        }
+      ]
+    },
+    "deployer": {
+      "wallet": {
+        "type": "privateKey",
+        "value": "${PRIVATE_KEY}"
+      },
+      "gasSettings": {
+        "gasLimit": 3000000
+      }
+    }
+  }
+}

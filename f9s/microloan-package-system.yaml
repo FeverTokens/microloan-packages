@@ -32,10 +32,19 @@ spec:
   dependencies:
     packageViewer:
       name: PackageViewer
-      address: "${PACKAGE_VIEWER_ADDRESS}"
+      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3"
     packageController:
       name: PackageController
-      address: "${PACKAGE_CONTROLLER_ADDRESS}"
+      address: "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512"
+
+  #       Deploying contract with args: []
+  # Waiting for transaction confirmation...
+  # Contract deployed at: 0x5FbDB2315678afecb367f032d93F642f64180aa3
+  #   ✓ PackageViewer deployed at 0x5FbDB2315678afecb367f032d93F642f64180aa3
+  # Deploying contract with args: []
+  # Waiting for transaction confirmation...
+  # Contract deployed at: 0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512
+  #   ✓ PackageController deployed at 0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512
 
   deployer:
     wallet:
