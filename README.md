@@ -106,6 +106,26 @@ npm run lint:fix   # write formatting
 
 ## Deployment
 
+### Quick Deploy with SDK
+
+Deploy using the Fever SDK with manifest-driven configuration:
+
+```bash
+# Compile contracts first
+npm run compile
+
+# Run SDK deployment
+npm run deploy:sdk
+```
+
+This uses `scripts/deploy-with-sdk.ts` which:
+- Loads artifacts from `metadata/combined.json`
+- Reads YAML manifest from `f9s/microloan-package-system.yaml`
+- Deploys packages and system with environment-based configuration
+- Supports external dependencies with pre-configured addresses
+
+### Manual Deployment
+
 - Helpers live in `scripts/services/packages.ts` (`deployContract`, `deployPackage`).
 - `scripts/deploy-erc3643.ts` demonstrates wiring of base contracts and the diamond. Follow its pattern to add microloan packages.
 
@@ -114,6 +134,30 @@ Run locally:
 ```bash
 npm run deploy:erc3643
 ```
+
+### External Dependencies Configuration
+
+For external dependencies (contracts deployed separately), configure addresses in the manifest:
+
+**1. Update `.env` with dependency addresses:**
+```env
+PACKAGE_VIEWER_ADDRESS=0x1111111111111111111111111111111111111111
+PACKAGE_CONTROLLER_ADDRESS=0x2222222222222222222222222222222222222222
+```
+
+**2. Reference in manifest (`f9s/microloan-package-system.yaml`):**
+```yaml
+spec:
+  dependencies:
+    packageViewer:
+      name: PackageViewer
+      address: "${PACKAGE_VIEWER_ADDRESS}"
+    packageController:
+      name: PackageController
+      address: "${PACKAGE_CONTROLLER_ADDRESS}"
+```
+
+When `address` is provided, the deployment will use that address directly. If not provided, it will attempt to deploy from artifacts. If neither address nor artifact exists, deployment will fail with a helpful error message.
 
 ## Project Layout
 
