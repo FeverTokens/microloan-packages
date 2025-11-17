@@ -32,8 +32,10 @@ spec:
   dependencies:
     packageViewer:
       name: PackageViewer
+      address: "${PACKAGE_VIEWER_ADDRESS}"
     packageController:
       name: PackageController
+      address: "${PACKAGE_CONTROLLER_ADDRESS}"
 
   deployer:
     wallet:

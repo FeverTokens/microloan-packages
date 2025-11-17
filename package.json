@@ -18,6 +18,12 @@
   "scripts": {
     "build": "tsc",
     "deploy:stablecoin": "hardhat run scripts/deploy-stablecoin.ts",
+    "deploy:sdk": "tsx scripts/deploy-with-sdk.ts",
+    "deploy:simple": "tsx scripts/deploy-simple-storage.ts",
+    "sdk:erc20-yaml": "tsx scripts/sdk/deploy-erc20-yaml.ts",
+    "sdk:erc20-json": "tsx scripts/sdk/deploy-erc20-json.ts",
+    "sdk:erc20-wallet": "tsx scripts/sdk/deploy-erc20-ethers-wallet.ts",
+    "sdk:programmatic": "tsx scripts/sdk/deploy-programmatic.ts",
     "run:handlers": "hardhat run scripts/run-handlers.ts",
     "compile": "TYPECHAIN_DONT_OVERRIDE_COMPILE=true hardhat compile && ts-node scripts/generate-metadata.ts",
     "compile:microlaon": "hardhat compile",
@@ -54,6 +60,7 @@
     "solc": "0.8.0",
     "solidity-coverage": "^0.8.12",
     "ts-node": "^10.9.2",
+    "tsx": "^4.20.6",
     "typechain": "^8.3.2",
     "typescript": "~5.0.4"
   },
@@ -61,9 +68,11 @@
     "@ethersproject/abi": "^5.7.0",
     "@ethersproject/bytes": "^5.7.0",
     "@fevertokens/packages": "^0.0.2",
+    "@fevertokens/sdk": "file:../fever-cli/packages/sdk",
     "@openzeppelin/contracts": "^5.0.2",
     "@types/dotenv": "^8.2.0",
     "@walletconnect/ethereum-provider": "^2.12.2",
+    "chalk": "^5.3.0",
     "dotenv": "^16.4.5",
     "ethereum-utils": "^1.0.0",
     "ethers": "^6.11.1"

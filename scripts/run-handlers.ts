@@ -43,6 +43,14 @@ function createERC20Contract(address: string, signer: Wallet): Contract & ERC20M
   return new Contract(address, ERC20_ABI, signer) as Contract & ERC20Methods;
 }
 
+// Helper function to validate ERC20 interface
+function assertIsERC20(contract: Contract | any): asserts contract is Contract & ERC20Methods {
+  // Basic validation that contract has required ERC20 methods
+  if (!contract || typeof contract.balanceOf !== 'function' || typeof contract.mint !== 'function') {
+    throw new Error('Contract does not implement ERC20 interface');
+  }
+}
+
 async function main() {
   const rpcUrl = process.env.RPC_URL;
   const chainIdEnv = process.env.CHAIN_ID;
