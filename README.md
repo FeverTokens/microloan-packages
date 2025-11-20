@@ -87,15 +87,17 @@ The microloan module extends a lending baseline by adding terms, flow control, a
 
 ## Quick Start
 
-- Prerequisites: Node.js 18+, npm, Hardhat
+- Prerequisites: Node.js 20+, npm, Hardhat, FeverTokens CLI
 
 ```bash
-npm install
-npm run compile   # compile and generate metadata/combined.json
-npm test
+fever install        # install dependencies
+fever compile --all  # compile and generate metadata
+cp .env.anvil .env   # set environment variables
+fever apply -f f9s/erc20-config.yaml             # deploy ERC20
+fever apply -f f9s/microloan-package-system.yaml # deploy packages and system
 ```
 
-## Build, Lint, Metadata
+## Build, Test, Lint, Metadata
 
 ```bash
 npm run compile    # hardhat compile + metadata
