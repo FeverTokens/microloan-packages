@@ -69,7 +69,7 @@
     "@ethersproject/abi": "^5.7.0",
     "@ethersproject/bytes": "^5.7.0",
     "@fevertokens/packages": "^0.0.2",
-    "@fevertokens/sdk": "file:../fever-cli/packages/sdk",
+    "@fevertokens/sdk": "^0.0.4",
     "@openzeppelin/contracts": "^5.0.2",
     "@types/dotenv": "^8.2.0",
     "@walletconnect/ethereum-provider": "^2.12.2",

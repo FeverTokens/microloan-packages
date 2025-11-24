@@ -170,7 +170,6 @@ async function main() {
             packages: [
               {
                 name: "LoanRegistry",
-                address: "0xB7f8BC63BbcaD18155201308C8f3540b07f84F5e",
               },
               {
                 name: "LoanFunding",
@@ -210,13 +209,68 @@ async function main() {
           forceRedeploy: false,
         },
       );
-      console.log(" result : %j", result);
       console.log(chalk.green("✅ Deployment successful!"));
-      console.log(chalk.cyan("📦 Deployment details:"));
-      console.log(chalk.gray(`   Contract: ${result.contractName}`));
+      console.log(chalk.cyan("📦 System Contract Details:"));
+      console.log(chalk.gray(`   Name: ${result.contractName}`));
       console.log(chalk.gray(`   Address: ${result.address}`));
       console.log(chalk.gray(`   Transaction: ${result.transactionHash}`));
       console.log(chalk.gray(`   Deployer: ${result.deployer}`));
+      console.log("result %j", result);
+
+      // Display dependencies if this is a PackageSystem
+      if (
+        "dependencies" in result &&
+        result.dependencies &&
+        result.dependencies.length > 0
+      ) {
+        console.log(chalk.cyan("🔗 Dependencies:"));
+        result.dependencies.forEach((dep: any) => {
+          const status = dep.deployed ? "✓ Deployed" : "→ Provided";
+          console.log(chalk.gray(`   ${dep.key}: ${dep.name}`));
+          console.log(chalk.gray(`     Address: ${dep.address}`));
+          console.log(chalk.gray(`     Status: ${status}`));
+        });
+        console.log();
+      }
+
+      // Display packages if this is a PackageSystem
+      if (
+        "packages" in result &&
+        result.packages &&
+        result.packages.length > 0
+      ) {
+        console.log(chalk.cyan("📦 Packages:"));
+        result.packages.forEach((pkg: any) => {
+          console.log(chalk.gray(`   ${pkg.name}`));
+          console.log(chalk.gray(`     Address: ${pkg.address}`));
+          console.log(
+            chalk.gray(
+              `     Functions: ${pkg.functions?.length || 0} selectors`,
+            ),
+          );
+          if (pkg.initializer) {
+            console.log(
+              chalk.gray(`     Initializer: ${pkg.initializer.function}`),
+            );
+          }
+          if (pkg.gasUsed) {
+            console.log(chalk.gray(`     Gas Used: ${pkg.gasUsed}`));
+          }
+        });
+        console.log();
+      }
+
+      // Display total gas if available
+      if ("totalGasUsed" in result && result.totalGasUsed) {
+        console.log(chalk.cyan("⛽ Gas Summary:"));
+        console.log(chalk.gray(`   System Gas: ${result.gasUsed || "N/A"}`));
+        console.log(chalk.gray(`   Total Gas: ${result.totalGasUsed}`));
+        console.log();
+      }
+
+      // Output JSON for consumption by other tools
+      console.log(chalk.cyan("📄 Full Deployment Result (JSON):"));
+      console.log(JSON.stringify(result, null, 2));
     } catch (error: any) {
       if (error.message.includes("not implemented")) {
         console.log(chalk.yellow("⚠️  " + error.message));
